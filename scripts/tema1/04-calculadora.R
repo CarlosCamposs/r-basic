@@ -48,11 +48,12 @@ NaN
 2 ^(-15) # 3.051758e-05 = 0.00003051758
 
 c(2^30, 2^(-15), 1, 2, 3/2)
-
+    # Cuando dos números tienen notación cientifica, los demás aparecerán en notación cientifica
+    # a pesar de que sean números pequeños como 1, 2, 3/2, etc.
 
 sqrt(25)
 
-exp(1)
+1-exp(-1)
 
 log(pi)
 
@@ -69,7 +70,7 @@ factorial(4)
 
 factorial(0)
 
-choose(5, 3)
+choose(5,3)
 
 choose(3,5)
 
@@ -78,6 +79,16 @@ log(4^6, 4)
 6^log(4,6)
 
 choose(5,2)
+
+# Las funciones trigonométricas en R vienen con argumentos en radianes (pi), por lo que será necesario
+# convertirlas
+
+sin(0)
+
+sin(pi/2) # Se piensa como la circunferencia unitaria que enseño Raggi
+
+# Si se quiere sacar el seno de 60 grados se multiplica por pi/180
+# (en general, es para convertir de grados a radianes)
 
 sin(60*pi/180)
 
@@ -97,27 +108,46 @@ asin(5) #arc sin x in [-1,1]
 
 acos(-8)
 
+
+# Sesion 23
+
 print(sqrt(2),10)
+    # Va a imprimir las 10 primeras cifras
+
 round(sqrt(2), 3)
+    # Va a mostrar el número redondeado a 3 cifras
+
 floor(sqrt(2))
+    # Función piso
+
 ceiling(sqrt(2))
+    # Función techo
+
 trunc(sqrt(2))
+    # Trunca, se queda solo con la parte entera, como la v.a. K_x
 
 sqrt(2)^2-2
+    # Se puede incurrir en estos errores donde no muestra directamente el cero
 
 round(sqrt(2), 4)^2
 
 2^50
+  # Aqui solo nos muestra la notación científica
 print(2^50, 15)
+  # Aqui nos muestra la notación exacta, nos dice quienes son esos 15 números
+
 print(2^50, 2)
+
 print(pi, 22)
 #3.141592653589793115998
 #3.141592653589793238462
+  # Cuando a R se le pide más de 16 digitos empiezan a ver errores, se puede notar en los primeros
+  # 16 números de pi
 
 round(1.25,1)
 round(1.35,1)
-round(sqrt(2),0)
-round(sqrt(2))
+round(sqrt(2),0)  #Este round(x,0) es un floor()
+round(sqrt(2))    #Si no se especifica cuantos, lo redondea a 0 decimales
 
 round(digits = 5, sqrt(2))
 round(5, sqrt(2))
@@ -127,7 +157,7 @@ floor(-3.45)
 ceiling(-3.45)
 trunc(-3.45)
 
-
+# Sesion 24
 x = (pi^2)/2
 x
 

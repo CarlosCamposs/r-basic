@@ -2,6 +2,8 @@
 #lm(y~x)
 
 
+############ Las siguientes lineas fueron copiadas de un help(lm)
+
 require(graphics)
 
 ## Annette Dobson (1990) "An Introduction to Generalized Linear Models".
