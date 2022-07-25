@@ -168,6 +168,7 @@ sin(pi/4) + cos(pi/4) -> z
 z
 
 edad <- 30
+str(edad)
 
 nombre = "Juan Gabriel"
 
@@ -182,6 +183,8 @@ x = x^2
 
 x = sqrt(x)
 
+#Sesion 25
+
 ## Función f(x) = x^3 - (3^x)* sen(x)
 f = function(x) {
   x^3 - (3^x) * sin(x)
@@ -191,16 +194,21 @@ f(4) # 4^3 - 3^4 * sin(4)
 f(5)
 f(pi/2)
 
+
+
 suma1 <- function(t){
   t + 1
 }
 suma1(6)
 suma1(-5)
 
+
 product <- function(x, y){
   x*y
 }
 product(5,7)
+
+
 
 g <- function(x,y,z) {
   exp(x^2 + y^2) * sin(z)
@@ -208,23 +216,72 @@ g <- function(x,y,z) {
 g(1, 2, 3)
 g(1, -1, pi)
 
+
+
+# Una función puede tener varias instrucciones si las separamos con ";"
 suma5 <- function(numero){
   numero = suma1(numero);
   numero = suma1(numero);
   numero = suma1(numero);
   numero = suma1(numero);
-  suma1(numero)
+  suma1(numero) # Este es el output
 }
 
 suma5(3)
 
-ls()
+ls() 
+      # Sirve para listar todo lo que hemos creado
 
 rm(product)
+      # "remove" sirve para eliminar algun objeto que ya no usaremos
 
 ls()
 
 rm(list = ls())
+      # Es para borras todos  
+
+
+# Sesion 26
+
+opBasic=function(a,b){
+  print("Suma")
+  print(a+b)
+  
+  print("Resta")
+  print( paste( sprintf("%i - %i =",a,b), a-b ) )
+  print( paste(sprintf("%i - %i",b,a), b-a))
+  
+  print("Producto")
+  print(a*b)
+  
+  print("Cociente de la divisón entera")
+  print(paste(sprintf("%i : %i= ",a,b),a%/%b))
+  print(paste("con residuo: ",a%%b))
+  print(paste(sprintf("%i : %i= ",b,a),b%/%a))
+  print(paste("con residuo: ",b%%a))
+  
+  
+}
+opBasic(6,4)
+
+##### La funcion sprintf: 
+x=3
+y=5
+
+paste("La suma es:",x+y)
+
+sprintf("La suma es %i + %i = ",x,y)
+      # Esto es lo que se debe meter en el primer argumento de la funcion paste
+
+
+#De modo que el resultado final es
+paste(sprintf("La suma es %i + %i= ",x,y), x+y)
+
+#Si esto se mete dentro de una función debe ser con la función print
+
+
+
+# Sesion 27
 
 class(3+2i)
 
@@ -237,9 +294,13 @@ class(3+2i)
 #Esto es un error:
 #2+7*i
 
-#pi + sqrt(2)i
+pi + sqrt(2)i
+      #No funciona puesto que no es un número racional o entero
+
+# Podemos usar esta función que nos permite hacer lo que queriamos en la isntrucción de arriba
 complex(real = pi, imaginary = sqrt(2)) -> z1
 z1
+
 
 sqrt(-5)
 sqrt(as.complex(-5))
@@ -253,14 +314,20 @@ cos(3+2i)
 
 #Módulo = sqrt(Re(z)^2 + Im(z)^2)
 Mod(z1)
+
+
 #Argumento = arctan(Im(z)/Re(z))
 # = arccos(Re(z)/Mod(z))
 # = arcsin(Im(z)/Mod(z))
 # va de (-pi, pi]
 Arg(-1+0i)
 Arg(-1-2i)
+
+
 #Conjugado = Re(z)- Im(z)i
 Conj(z1)
+
+
 #Parte Real y Parte Imaginaria
 Re(z1)
 Im(z1)
@@ -271,3 +338,7 @@ z2
 Mod(z2)
 Arg(z2)
 pi/2
+
+
+
+rm(list=ls())
