@@ -1,0 +1,76 @@
+---
+title: "Notas de Markdown"
+author: "Carlos, C."
+date: "2022-07-31"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+\noindent \textcolor{blue}{Chunk}. Bloque de código\
+
+\noindent Los blóques de código de R  de un documento de un documento R Markdown se indican de la siguiente manera:
+
+Para una variable aleatoria $X \sim exp(\lambda)$ siempre se cumple  que $F(E[X])=1-e^{-1}$. 
+```{r VAexponencial}
+1-exp(-1)
+```
+
+El anterior \textbf{chunk} se puede crear con el short cut \textit{Alt + Ctrl + I}.\
+
+Para hacer una visualización del Markdown que hemos hechos debemos hacer un \textbf{Knit}, se puede hacer dando clikc sobre el icono que aparece en RStudio o con el short cut \textit{Ctrl+Shift+K}.
+
+Al momento de definir un chunk se pueden establecer \textit{parámetros}, por ejemplo:
+
+\begin{center}
+\textit{echo} \hspace{2cm} \textit{message} \hspace{2cm} \textit{comment} \hspace{2cm} \textit{results}
+\end{center}
+
+Con el parámetro \textbf{echo=TRUE} se establece que queremos mostrar el código fuente del chunk, este es el valor por defecto si no se especifica. En cambio,  \textbf{echo=FALSE} indica que no queremos mostrar el código fuente.\
+
+( vgr. \textit{echo=TRUE})\ Para una variable aleatoria $X \sim exp(\lambda)$ siempre se cumple  que $F(E[X])=1-e^{-1}$. 
+```{r echoT, echo=TRUE}
+1-exp(-1)
+```
+
+(vgr. \textit{echo=FALSE})\ Para una variable aleatoria $X \sim exp(\lambda)$ siempre se cumple  que $F(E[X])=1-e^{-1}$. 
+```{r echoF, echo=FALSE}
+1-exp(-1)
+```
+\newpage
+
+Con el parámetro \textbf{message=TRUE} establecemos que queremos mostrar los mensajes que R produce al ejecutar el código. En caso de \textbf{message=FALSE}, no se mostrarán.\
+
+(vgr message=TRUE)\ Cargamos el paquete de cuadrados mágicos
+```{r msgT,message=T}
+library(magic)
+magic(6)
+```
+
+(vgr message=FALSE)\ Cargamos el paquete de cuadrados mágicos
+```{r msgF,message=F}
+library(magic)
+magic(6)
+```
+
+Con el parámetro \textbf{comment=NA} se establece que no queremos mostrar los "#" que aparecen en el chunk.
+
+( vgr. \textit{comment=NA})\ Para una variable aleatoria $X \sim exp(\lambda)$ siempre se cumple  que $F(E[X])=1-e^{-1}$. 
+```{r cNA, echo=TRUE, comment=NA}
+1-exp(-1)
+```
+
+Con el parámetro \textbf{results} se puede establecer la manera en la que queremos mostrar los resultados de la ejecución de un bloque de código. Este parámetro tiene cuatro posibles valores:\
+
+\textbf{results=markup}: Nos muestra los resultados en el documento final línea por línea, es el valor por defecto y coloca los "#".\
+
+\textbf{results=asis}: Nos devuelve los resultados línea a línea de manera literal en el documento final y el programa conel que se abre el documento final los interpreta como texto y formatea adecuadamente.\
+
+\textbf{results=hold}: Muestra todos los resultados al final del bloque del código.\
+
+\textbf{results=hide}: No se muestra el resultado en el documento final. (parecido a la función echo=FALSE)\
+
