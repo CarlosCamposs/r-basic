@@ -9,20 +9,24 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Chunk
 
-\noindent \textcolor{blue}{Chunk}. Bloque de código\
 
-\noindent Los blóques de código de R  de un documento de un documento R Markdown se indican de la siguiente manera:
+\noindent Los blóques de código de R en un documento Markdown se llaman \textbf{chunk} y son como el que se muestra a continuación:
 
 Para una variable aleatoria $X \sim exp(\lambda)$ siempre se cumple  que $F(E[X])=1-e^{-1}$. 
 ```{r VAexponencial}
 1-exp(-1)
 ```
 
-El anterior \textbf{chunk} se puede crear con el short cut \textit{Alt + Ctrl + I}.\
+El anterior chunk se puede crear con el short cut \textit{Alt + Ctrl + I}.\
 
-Para hacer una visualización del Markdown que hemos hechos debemos hacer un \textbf{Knit}, se puede hacer dando clikc sobre el icono que aparece en RStudio o con el short cut \textit{Ctrl+Shift+K}.
+Para hacer una visualización del Markdown que hemos hecho debemos realizar un \textbf{Knit}, esto se puede hacer dando click sobre el icono que aparece en RStudio o con el short cut \textit{Ctrl+Shift+K}.\
+
+Ahí mismo podemos establecer si queremos que el Markdown sea mostrado como PDF o HTML.
+
+\section{Argumentos de un chunk}
+
 
 Al momento de definir un chunk se pueden establecer \textit{parámetros}, por ejemplo:
 
@@ -56,21 +60,24 @@ magic(6)
 library(magic)
 magic(6)
 ```
+\vspace{1cm}
 
-Con el parámetro \textbf{comment=NA} se establece que no queremos mostrar los "#" que aparecen en el chunk.
+
+Con el parámetro \textbf{comment=NA} se establece que no queremos mostrar los "#" que aparecen en el chunk.\
 
 ( vgr. \textit{comment=NA})\ Para una variable aleatoria $X \sim exp(\lambda)$ siempre se cumple  que $F(E[X])=1-e^{-1}$. 
 ```{r cNA, echo=TRUE, comment=NA}
 1-exp(-1)
 ```
+\newpage
 
 Con el parámetro \textbf{results} se puede establecer la manera en la que queremos mostrar los resultados de la ejecución de un bloque de código. Este parámetro tiene cuatro posibles valores:\
 
-\textbf{results=markup}: Nos muestra los resultados en el documento final línea por línea, es el valor por defecto y coloca los "#".\
+\textbf{results=markup:} Nos muestra los resultados en el documento final línea por línea, es el valor por defecto y coloca los "#".\
 
-\textbf{results=asis}: Nos devuelve los resultados línea a línea de manera literal en el documento final y el programa conel que se abre el documento final los interpreta como texto y formatea adecuadamente.\
+\textbf{results=asis:} Nos devuelve los resultados línea a línea de manera literal en el documento final y el programa con el que se abre el documento final los interpreta como texto y formatea adecuadamente.\
 
-\textbf{results=hold}: Muestra todos los resultados al final del bloque del código.\
+\textbf{results=hold:} Muestra todos los resultados al final del bloque del código.\
 
-\textbf{results=hide}: No se muestra el resultado en el documento final. (parecido a la función echo=FALSE)\
+\textbf{results=hide:} No se muestra el resultado en el documento final. A diferencia de  echo=FALSE, este último no muestra la línea de código de R pero sí los resultados. En caso de querer ocultar también los resultados podemos establecer \textit{results=hide}.\
 
