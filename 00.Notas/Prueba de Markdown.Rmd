@@ -73,11 +73,131 @@ Con el parámetro \textbf{comment=NA} se establece que no queremos mostrar los "
 
 Con el parámetro \textbf{results} se puede establecer la manera en la que queremos mostrar los resultados de la ejecución de un bloque de código. Este parámetro tiene cuatro posibles valores:\
 
-\textbf{results=markup:} Nos muestra los resultados en el documento final línea por línea, es el valor por defecto y coloca los "#".\
+\textbf{results='markup':} Nos muestra los resultados en el documento final línea por línea, es el valor por defecto y coloca los "#".\
 
-\textbf{results=asis:} Nos devuelve los resultados línea a línea de manera literal en el documento final y el programa con el que se abre el documento final los interpreta como texto y formatea adecuadamente.\
+\textbf{results='asis':} Nos devuelve los resultados línea a línea de manera literal en el documento final y el programa con el que se abre el documento final los interpreta como texto y formatea adecuadamente.\
 
-\textbf{results=hold:} Muestra todos los resultados al final del bloque del código.\
+\textbf{results='hold':} Muestra todos los resultados al final del bloque del código.\
 
-\textbf{results=hide:} No se muestra el resultado en el documento final. A diferencia de  echo=FALSE, este último no muestra la línea de código de R pero sí los resultados. En caso de querer ocultar también los resultados podemos establecer \textit{results=hide}.\
+\textbf{results='hide':} No se muestra el resultado en el documento final. A diferencia de  echo=FALSE, este último no muestra la línea de código de R pero sí los resultados. En caso de querer ocultar también los resultados podemos establecer \textit{results=hide}.\
+
+\section{Chunk  en medio de texto}
+
+Es posible agregar un chunk dentro de un texto que estemos escribiendo sin la necesidad de hacerlo por separado (como hemos hecho hasta ahora). Para este fin se debe usar la sintaxis:\hspace{0.1cm} $\text{'r [código]'}$ \hspace{0.1cm} en el espacio donde quisieramos introducir el chunk.\
+
+
+(vgr) Para cualquier variable aleatoria $X\sim exp(\lambda)$ se cumple que
+\begin{center}
+$F_X(E[X])=1-e^{-1}=$ `r 1-exp(-1) `
+\end{center}
+
+Podriamos escribir dentro de un chunk "normal" el código de `R` necesario para realizar alguna tarea y luego establecer \textit{echo=FALSE} y \textit{results='hide'} para que no se muestre el código en el archivo PDF, pero hacer uso de los cálculos que `R` haya realizado con ese código que escribimos.
+
+```{r notas, results='hide', echo=FALSE}
+notas=c(9,10,7,7,9,10,8,9,6)
+media=mean(notas)
+n=length(notas)
+desv.tip=sd(notas)
+```
+
+(vgr) Este año he hecho $n=$ `r n` exámenes, con una media $\bar{x}=$ `r round(media,2)` y una desviación estándar de $s=$ `r round(desv.tip,2)`\
+
+El chunk que está implícito en la anterior línea es el siguiente:
+
+```{r notasR, comment=NA}
+notas=c(9,10,7,7,9,10,8,9,6)
+media=mean(notas)
+n=length(notas)
+desv.tip=sd(notas)
+```
+
+\newpage
+
+\section{Documentación de textos usando Markdown}
+
+# Título 1
+
+## Título 2
+
+### Título 3
+
+#### Título 4
+
+##### Título 5 
+
+
+Esto es un texto llano. Podemoe escribir sin algún problema todo el texto que quisieramos para acompañar a tanto el código en `R` como las fórmulas en $LaTeX$.
+
+Esto sería ua nueva línea de texto. Se puede poner este nuevo párrafo con una diagonal invertida (como en LaTeX común) o presionando dos "Enter" después de acabar un párrafo.
+
+Para colocar cursiva podemos usar un \textbf{asterísco} *esto sería un texto en cursiva* o bien usar \textbf{barra baja} _esto también es cursiva_. 
+
+Para colocar negrita podemos usar **doble asterísco** o bien **doble barra baja**.
+
+Los superíndices se pueden colocar con "^": este curso vale por mi nota^2^
+
+Para tachar una palabra usamos doble tilde "~":  ~~Matemáticas~~
+
+Se puede asociar un link a un texto de la siguiente forma: [\textcolor{blue}{SOA website}](https://www.soa.org/)
+
+Un guión corto se hace con doble guión "-": --
+
+Un guión largo se hace con triple guión "-": ---
+
+Una elipsis se puede hacer con tres puntos ".": ...
+
+En caso de querer incorporar una imagen: "\text{![]()}" y dentro del paréntesis debemos especificar donde se encuentra la imagen. Se puede "subir nivel" (mover entre carpetas) usando "..\\ " :  ![](FCFM.png)
+
+\newpage
+
+Se puede colocar una barra divisora con tres asteríscos "*":
+
+***
+Aquí se empieza otra cosa
+
+Las citas se pueden colocar con un signo ">":
+
+> Esto es una cita
+
+También podemos crear una lista:
+
+**Listas no ordenadas:**
+
+* Item primero
+    + Sub item 1.1
+    + Sub item 1.2
+    + Sub item 1.3
+
+* Item segundo
+
+* Item tercero
+
+**Listas ordenadas**
+
+1. Primer item
+    + Sub item 1.1
+    + Sub item 1.2
+
+2. Segundo item
+
+3. Tercer item
+
+1. Cuarto item
+
+1. Quinto item
+
+
+Para colocar tablas:
+
+
+Alumno        |   Nota    |   Edad
+--------------|-----------|---------
+Juan Gabriel  | 3.5       | 30
+Ricardo       | 5.6       | 55
+María         | 7.3       | 20
+Antonio       | 9.5       | 28
+
+Este lenguaje se puede usar para el README de un Github
+
+Existen pequeñas diferencias entre mostrar este Markdwon con PDF y HTML
 

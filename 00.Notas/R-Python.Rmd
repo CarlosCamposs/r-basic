@@ -1,0 +1,73 @@
+---
+title: "R & Python"
+author: "Carlos C."
+date: "2022-08-02"
+output: pdf_document
+---
+
+Desde `R` podemos trabajar con paquetes de Python
+```{r}
+library(reticulate)
+
+os<-import("os")
+os$listdir(".")
+```
+
+La biblioteca \textit{reticulate} de `R` es la que nos permite hacer este vínculo. Podemos hacer la importación de la bliblioteca "os" y la guardamos en una variable en `R`, con el símbolo "$" podemos acceder a sus funciones. Muestra todas las carpetas y ficheros.\
+
+
+En ocasiones podría resultar en un error si tratamos de abrir este Markdown en un PDF, en ese caso sería preferible abrirlo como HTML.\
+
+Después de cargar *reticulate* es recomendable escribir las dos siguientes líneas de código\
+
+use_python("ruta")\
+
+Puesto que permite usar la versión que tengamos instalado en Anaconda. Al usar esta línea de código se nos estarán cargando paquetes de Python para que puedan ser usados en `R`. Si nos hiciera falta un paquete podemos instalarlo con la siguiente línea\
+
+py_install("nombre del paquete a instalar")\
+
+Al haber especificado la ruta donde se encuentra Python y al instalar un programa, se instalará en Anaconda, para que si hacemos uso de Python (fuera de R) podas tener ya instalado ese paquete de Python.\
+
+Podemos tener un script de Python que contenga alguna función que quisieramos usar en R, para esto debemos hacer lo siguiente. El archivo que contiene una función en Python se llama "add.py"
+```{r FuncionPY}
+source_python("add.py")
+add(3,4)
+```
+
+Podemos mostrar objetos de Python en el Markdown y si quisieramos pasarlos a objetos de `R` podemos usar la función "py_to_r" como se muestra en el siguiente ejemplo:
+```{r}
+np<-import("numpy", convert=FALSE)
+
+x<-np$array(c(1:4))
+sum<-x$cumsum()
+
+#Esto es un objeto de Python
+print(sum)
+
+#Esto es un objeto de R
+py_to_r(sum)
+```
+
+Es posible crear chunks de Python desde R y trabajar sobre estos. Cargaremos unos datos en `R` para pasarlos a Python:
+
+```{r}
+datos<-iris
+head(datos)
+# Con la siguiente variable me sirve para decir que son los datos que voy a pasar a Python
+datos_py<-r_to_py(datos) 
+```
+
+Se crea un chunk de Python
+```{python}
+import pandas as pd
+
+# Para acceder a un objeto de R (previamente declarado con la función r_to_py) 
+# simplemente hacemos uso de "r." y podemos aplicar cualquier función 
+r.datos_py.head()
+
+```
+
+
+
+
+
