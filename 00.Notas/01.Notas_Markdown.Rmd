@@ -200,4 +200,12 @@ Antonio       | 9.5       | 28
 Este lenguaje se puede usar para el README de un Github
 
 Existen pequeñas diferencias entre mostrar este Markdwon con PDF y HTML
+\newpage
+
+Al momento de incluir gráficos en nuestro Markdwon pudiera ocurrir que la imagen es demasiado grande y quisieramos ajustarla o centrarla, para ello podemos definir (dentro de los parámetros del chunk) lo siguiente
+
+\begin{center}
+fig.width=5 \hspace{1cm} fig.height=5 \hspace{1cm} fig.align="center"
+\end{center}
+
 

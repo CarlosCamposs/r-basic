@@ -1,0 +1,215 @@
+---
+title: "Estructuras de datos en R"
+author: "Carlos C."
+date: "2022-08-02"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Vectores y tipos de datos en R
+
+Un **vector** es una secuencia ordenada de datos. `R` dispone de muchos tipos de datos, por ejemplo:
+
+* logical: valores lógicos (TRUE o FALSE)
+
+* integer: números enteros, $\mathbb{Z}$
+
+* numeric: números reales, $\mathbb{R}$
+
+* complex: números complejos, $\mathbb{C}$
+
+* character: palabras
+
+
+En los vectores de `R`, todas las entradas deben ser del mismo tipo: todas números, todas palabras, etc. Cuando queramos usar vectores formados por objetos de diferentes tipos de datos tendremos que usar _listas generalizadas_ (lists). \
+
+`R` va a definir la _class_ del vector de acuerdo a la siguiente jerarquia:
+
+\begin{center}
+ character \hspace{0.5cm} complex\hspace{0.5cm} numeric\hspace{0.5cm} integer\hspace{0.5cm} logical
+\end{center}
+
+(vgr) Supongamos que tenemos el siguiente vector que tiene diferentes tipos de datos
+```{r Ejemplo1, comment=NA}
+vector<-c(27, TRUE, 3.5, "Carlos")
+class(vector)
+```
+\newpage
+
+# Básico
+
+Para crear/manipular vectores podemos hacer uso de las siguientes líneas:
+
+* **c()**: para definir un vector. Significa concatenar.
+
+```{r Ejemplo2, comment=NA}
+# (vgr)
+c(1,2,3,4,5)
+```
+
+Es posible concatenar varios vectores con la misma sentencia.
+
+```{r , comment=NA}
+# (vgr)
+x<-c(1,3,5,7,9)
+y<-c(0,2,4,6,8)
+
+vector<-c(x,y)
+vector
+```
+
+
+* **scan()**: para definir un vector, entrada por entrada, en la consola. Se introducen las entradas del vector separándolas por un espacio y para terminar se da un doble "Enter". Con la función *scan()* podemos definir parámetros como *sep=""* y *dec="."* para especificar si nuestros datos están separados por algún otro valor que no sea un espacio o si los decimales de los datos que estamos leyendo vienen representados por una coma. Esta función nos permite leer datos de páginas web o archivos locales.
+
+* **fix(x)**: para modificar visualmente el vector $x$ desde una ventana en RStudio. Se modifica de forma "manual" las entradas del vector.
+
+* **rep(a,n)**: para definir un vector constante que contiene el dato $a$ repetido $n$ veces. Es una función muy útil para hacer simulaciones.
+```{r Ejemplo3, comment=NA}
+# (vgr)
+rep("Act",7)
+```
+
+\newpage
+
+# Progresiones y Secuencias
+
+Una __progresión aritmética__ es una sucesión de números tales que la diferencia, $d$, de cualquier par de términos sucesivos de la sucesión es constante
+
+$$a_{n}=a_{1}+(n-1)\ d$$
+
+* **seq(a,\ b,\ by=d)**: para agregar una progresión aritmética de diferencia $d$ qie empieza en $a$ hasta llegar a $b$. Es posible definir la $d<0$ para indicar que es una progresión aritmética decreciente.
+
+```{r Ejemplo4, comment=NA}
+# (vgr)
+seq(5,60,5)
+
+# (vgr)
+seq(5,60, 3.5)
+```
+
+* **seq(a,\ b,\ length.out=n)**: define una progresión aritmética de longitud $n$ que va de $a$ a $b$ con diferencia $d$. Por lo tanto, $d=(b-a)/(n-1)$. En este caso estamos especificando que queremos $n$ entradas en el vector.
+
+```{r Ejemplo5, comment=NA}
+# (vgr)
+seq(4,35,length.out=7)
+```
+
+* **seq(a,\ by=d,\ length.out=n)**: define la progresión aritmética de longitud $n$ y diferencia $d$ que empieza en $a$. Con esto logramos un vector con $n$ entradas, la primera será $a$ y cada entrada aumentará en $a$ unidades.
+
+```{r Ejemplo6, comment=NA}
+# (vgr)
+seq(4,by=3, length.out=7)
+```
+
+
+* **a:b**: define la secuencia de números enteros consecutivos entre dos números $a$ y $b$.
+
+```{r Ejemplo7, comment=NA}
+1:10
+```
+
+\newpage
+
+# Funciones 
+
+Cuando queremos aplicar una función a cada uno de los elementos de un vector de datos, la función \textit{sapply} nos ahorra tener que programar con bucles en `R`:
+
+* __sapply(nombre_de_vector ,\ FUN=nombre_de_función)__: para aplicar dicha función a todos los elementos del vector.
+
+```{r, comment=NA}
+x<-1:5
+# Definimos la función dentro de sapply
+sapply(x, FUN=function(elemento){elemento^2})
+```
+
+```{r, comment=NA}
+x<-1:5
+# Definimos la función aparte
+cuadrado<-function(elemento){elemento^2}
+
+sapply(x,FUN=cuadrado)
+```
+
+
+Dado un vector de datos $x$ podemos calcular muchas medidas estadísticas acerca del mismo:
+
+* **length(x)**: calcula la longitud del vector $x$
+
+* **max(x)**: calcula el máximo del vector $x$
+
+* **min(x)**: calcula el mínimo del vector $x$
+
+* **sum(x)**: calcula la suma de las entradas del vector $s$
+
+* **prod(x)**: calcula el producto de las entradas del vector $x$
+
+* **mean(x)**: calcula la media aritmética de las entradas del vector $x$
+
+* **diff(x)**: calcula el vector formado por las diferencias sucesivas entre entradas del vector original $x$
+```{r, comment=NA}
+x<-c(1,3,7,12,20,30)
+diff(x)
+```
+
+* **cumsum(x)**: calcula el vector formado por las sumas acumuladas de las entradas del vector original $x$. Permite definir sucesiones descritas mediante sumatorios. Cada entrada es la suma de las entradas de $x$ hasta su posición.
+```{r, comment=NA}
+x<-1:10
+cumsum(x)
+```
+
+# Orden 
+
+* **sort(x)**: ordena el vector en orden natural de los objetos que lo forman: el orden numérico creciente, orden alfabético, etc. Podemos definir el parámetro _decrease=TRUE_ para que los ordene de forma decreciente.
+```{r, comment=NA}
+v<-c(1,7,5,2,4,6,3)
+sort(v)
+
+# De forma decreciente
+sort(v, decreasing = TRUE)
+```
+
+* **rev(v)**: invierte el orden de los elementos del vector $v$
+```{r, comment=NA}
+# v<-c(1,7,5,2,4,6,3)
+rev(v)
+```
+
+**NOTA:** no es necesario volver a llamar al vector $v$ para usarlo en otro chunk, se queda guardado en la memoria de `R`.
+\newpage
+
+# Ejercicio
+
+## Producto notable
+
+La fórmula del producto notable es
+
+$$(a+b)^2=a^2+2ab+b^2$$
+
+## Función con R
+
+```{r, comment=NA}
+binomioNewton2<-function(a,b){
+  a^2+2*a*b+b^2
+}
+binomioNewton2(2,1)
+```
+
+## Binomio de Newton
+
+$$(a+b)^n= \sum_{k=0}^{n}\ \binom{n}{k}\ a^{n-k} \cdot b^{k}$$
+
+## Función con R
+```{r, comment=NA}
+binomioNewton=function(a,b,n){
+  cumsum(choose(n,(0:n))*a^{n-(0:n)}*b^{(0:n)})[n+1]
+}
+binomioNewton(2,1,2)
+```
+
+La función _cumsum_ regresa un vector, por lo que le estamos pidiendo que nos regresa la entrada $n+1$.
+
+
+
