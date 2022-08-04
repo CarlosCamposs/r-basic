@@ -211,5 +211,167 @@ binomioNewton(2,1,2)
 
 La función _cumsum_ regresa un vector, por lo que le estamos pidiendo que nos regresa la entrada $n+1$.
 
+\newpage
+
+# Subvectores
+
+**vector[i]** nos regresa la $i$-ésima entrada del vector.
+
+```{r, comment=NA}
+x<-seq(1,50, by=3.5)
+x
+```
+
+* Los índices en `R` empiezan en 1
+
+* **x[length(x)]**: nos da la última entrada del vector
+
+```{r, comment=NA}
+x[length(x)]
+```
 
 
+* **x[a:b]**: nos da el subvector con las entradas del vector original que van de la _posición a_ hasta la _posición b_.
+
+```{r, comment=NA}
+x[3:5]
+```
+
+
+* **x[-i]**: nos devuelve el subvector formado por todas las entradas del vector original menos la entrada $i$-ésima. 
+
+```{r, comment=NA}
+x[-c(1,15)]
+```
+
+* **x[-y]**: si $y$ es un vector (de índices), entonces este es el complementario de vector $x[y]$.
+
+```{r, comment=NA}
+y<-1:10
+x[-y]
+```
+
+
+También podemos utilizar operadores lógicos:
+
+* **==**: Igualdad
+
+* **!=**: Desigualdad
+
+* **>=**: Mayor o igual que
+
+* **<=**: Menor o igual que
+
+* **!**: NO lógico
+
+* **&**: Y lógico
+
+* **|**: O lógico
+
+# Condicionales
+
+La clave para hacer buen uso de los _which()_ es entender que regresan la __posición__ en la que se ubica un elemento que cumple con cierta condición, si quisieramos saber qué elemento es, debemos hacer $x[which()]$.
+```{r, comment=NA}
+x<-c(3,8,10,-2,0,5,12,-3,2,0,-3,12,1)
+x
+```
+
+
+
+* **which(x cumple condición)**: para obtener los _índices_ (posiciones) de las entradas del vector $x$ que satisfacen la condición dada.
+
+```{r,comment=NA}
+which(x<0)
+```
+
+
+
+* **which.min(x)**: nos devuelve la _primera posición_ en la que el vector $x$ toma su valor mínimo.
+```{r, comment=NA}
+which.min(x)
+```
+
+
+
+* **which.max(x)**: nos da la _primera posición_ en la que el vector $x$ toma su valor máximo.
+```{r, comment=NA}
+which.max(x)
+```
+
+
+* **which(x==min(x))**: devuelve todas las posiciones en la que el vector $x$ toma su valor mínimo (en caso de que el valor mínimo aparezca en más de una entrada).
+
+```{r,comment=NA}
+which(x==min(x))
+```
+
+
+* **which(x==max(x))**: da todas las posociones en las que el vector $x$ toma su valor máximo.
+
+```{r,comment=NA}
+which(x==max(x))
+```
+\newpage
+
+# Los valores NA
+
+Una vez que hayamos creado un vector, podemos cambiar sus entradas o agregar nuevas.
+```{r, comment=NA}
+# Cambiar valores
+x<-1:10
+x[3:5]=32
+x
+```
+
+```{r, comment=NA}
+# Agregar nuevos valores
+x[11]=11
+x[12:13]=c(12,13)
+x[18]=18
+x
+```
+
+Cuando tenemos un vector con valores NA no es posible hacer cálculos como _mean_, _std_ y otras. Una primera solución podría ser usar el argumento **na.rm=TRUE** (na remove)
+```{r, comment=NA}
+# Mean
+mean(x,na.rm = T)
+```
+
+Por otro lado, podemos conocer qué entradas son las que poseen valores NA, es decir, las posiciones del vector en las que se encuentran los valores NA. Esto se puede hacer con la función **is.na()**
+```{r, comment=NA}
+# Devuelve las posiciones donde se encuentran los valores nulos
+is.na(x)
+```
+Para saber en qué posiciones del vector $x$ se encuentran estos valores NA podemos hacer uso de la función *which()* (recordar que esta función regresa _posiciones_).
+```{r, comment=NA}
+which(is.na(x))
+```
+
+Ahora que conocemos las posiciones en donde se tienen valores NA podemos hacer varias técnicas para tratarlos. Una técnica simple es __sustituir los valores NA por su media__.
+```{r}
+x[which(is.na(x))]=mean(x, na.rm=T)
+x
+```
+\newpage
+
+Una alternativa, no recomendable, podria ser omitir los registros que tengan valores NA. Esto se logra con la función **na.omit()**
+```{r, comment=NA}
+v<-1:10
+v[14]=14
+na.omit(v)
+```
+
+Las leyendas que aparecen debajo del vector pueden ser ignoradas, no afectan en la realización de cálculos ni a las propiedades. Se indican qué posiciones contenian valores nulos.
+
+\textcolor{red}{(Buscar más técnicas para tratar valores nulos)}
+
+
+\newpage
+
+# Factor
+
+Poner el ejemplo de las notas
+
+Los factores pueden ayudarnos a agrupar (min 16 ejemplo)
+
+# Factor ordenado
