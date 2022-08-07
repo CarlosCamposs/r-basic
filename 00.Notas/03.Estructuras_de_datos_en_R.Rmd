@@ -80,7 +80,7 @@ Una __progresión aritmética__ es una sucesión de números tales que la difere
 
 $$a_{n}=a_{1}+(n-1)\ d$$
 
-* **seq(a,\ b,\ by=d)**: para agregar una progresión aritmética de diferencia $d$ qie empieza en $a$ hasta llegar a $b$. Es posible definir la $d<0$ para indicar que es una progresión aritmética decreciente.
+* **seq(a,\ b,\ by=d)**: para agregar una progresión aritmética de diferencia $d$ que empieza en $a$ hasta llegar a $b$. Es posible definir la $d<0$ para indicar que es una progresión aritmética decreciente.
 
 ```{r Ejemplo4, comment=NA}
 # (vgr)
@@ -370,7 +370,7 @@ Las leyendas que aparecen debajo del vector pueden ser ignoradas, no afectan en 
 
 # Factor
 
-Es como un vector pero con una estructura interna más rica que permite usarlo para clasificar obsevraciones.
+Es como un vector pero con una estructura interna más rica que permite usarlo para clasificar observaciones.
 
 * **levels**: atributo del factor. Cada elemento del factor debe estar definido en los niveles
 
@@ -568,5 +568,50 @@ Para aplicar otras funciones a las filas o columnas de una matriz $M$ se usa la 
 M<-matrix(1:12, nrow=3, byrow=F)
 apply(M, MARGIN=c(1,2), FUN=function(x){x^2})
 ```
+
+\newpage
+
+## Operaciones
+
+* **t(M)**: para obtener la transpuesta de la matriz M
+
+```{r, comment=NA}
+M<-rbind(c(1,2,3),c(4,5,6),c(7,8,9))
+t(M)
+```
+
+
+* **+**: para sumar matrices
+
+* **\***: para el producto de un escalar por una matriz
+
+* **\%\*\%**: para multiplicar matrices
+```{r, comment=NA}
+A<-matrix(1:9, nrow=3, byrow=F)
+B<-matrix(7, nrow=3)
+
+A%*%B
+```
+
+
+
+* **mtx.exp(M,n)**: para elevar la matriz a la $n$ (del paquete _Biodem_). No calcula las potencias exactas, las aproxima
+  
+* **\%\%**: para elevar matrices (del paquete *expm*). No calculas las potencias exactas, las aproxima
+
+* **det(M)**: para calcular el determinante de la matriz
+
+* **qr(M)$rank**: para calcular el rango de la matriz
+
+* **solve(M)**: para calcular la inversa de una matriz invertible. También es posible resolver sistemas de ecuaciones lineales. Para ello introducimos **solve(M,b)**, donde $b$ es el vector de términos independientes.
+
+```{r, comment=NA}
+M<-rbind(c(1,4,2),c(0,1,3),c(1,8,9))
+M
+
+solve(M,c(1,2,3))
+```
+
+
 
 
