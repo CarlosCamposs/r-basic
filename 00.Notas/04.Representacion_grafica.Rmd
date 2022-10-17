@@ -1,0 +1,88 @@
+---
+title: "Introducción a la representación gráfica"
+author: "Carlos C."
+date: "2022-08-07"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Gráficos con la función `plot`
+
+* **plot(x, y)**: dibuja un gráfico básico de puntos siendo `x`, `y` vectores numéricos. 
+
+  + **plot(x)=plot( 1:length(x), x)**: en caso de hacer uso de un solo argumento `x`, el eje de las abscisas serán los números naturales y el vector `x` será la ordenada.
+  
+* **plot(x, función)**: para dibujar el gráfico de cualquier función.
+
+
+```{r, comment=NA, fig.cap="Gráfico básico explicando el uso del plot", fig.height=4, fig.align='center'}
+alumnos=c(1:10)
+notas=c(2,5,7,9,8,3,5,6,10,7)
+#Gráfica de la función
+plot(alumnos,notas)
+```
+
+
+\newpage
+
+Es posible ponerle una etiqueta a la gráfica con el parámeto __fig.cap__ en el chunk.
+
+```{r, comment=NA, fig.height=4, fig.cap="Gráfica de una función"}
+f<-function(x){sqrt(x)}
+plot(f)
+```
+  
+# Parámetros de la función `plot()`
+  
+* **log**: para indicar que queremos el gráfico en escala logarítmica (0, 10, 100, 1000, etc.) y se iguala al eje x o al eje y.
+
+* **main("título")**: para poner título al gráfico. Si en vez de un texto se quiere poner una expresión matemáica, entonces se debe poner la función **expression()**, esta última se escribe en LaTeX.
+
+* **xlab("etiqueta")**: para poner etiqueta al eje x
+
+* **ylab("etiqueta")**: para poner etiqueta al eje y
+
+* **pch=n**: para elegir el símbolo de los puntos. $n=\overline{0, 25}$ El valor por defecto es `pch=1`. Significa point character.
+
+* **cex**: para elegir el tamaño de los símbolos. `cex=1` es el tamaño estándar y de ahí se va aumentando.
+
+* **col="color en inglés"**: para elegir el color de los símbolos.  [\textcolor{blue}{Gama de colores}](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
+  
+```{r, comment=NA, fig.height=3}
+par(mfrow=c(1,2))
+
+plot=plot(exp(1:20), xlab='Indice', ylab=expression(e^{1:20}),
+          main='Escala lineal')
+
+plotLog=plot(exp(1:20), log='y', xlab='Indice', ylab=expression(e^{1:20}),
+             main='Escala logarítmica en el eje y')
+```
+  
+Con __par(mfrow=c(1,2))__ estamos usando una distribución de gráficos de una fila y dos columnas  
+  
+\newpage  
+## Más ejemplos
+
+
+```{r, comment=NA, fig.height=4}
+# Sucesión de Fibonacci
+n=1:20
+fib=(1/sqrt(5))*((1+sqrt(5))/2)^n-(1/sqrt(5))*((1-sqrt(5))/2)^n
+plot(fib, xlab="n", ylab=expression(F[n]), main="Sucesión de Fibonacci", pch=21, 
+                                    cex=2, col="powderblue", bg="orchid")
+```
+ El color `powderblue` es para el borde y el `orchid` para el relleno. Poner este relleno y el borde de diferentes colores es válido cuando `pch=21` y usamos el parámetro `bg` (background).
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
